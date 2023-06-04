@@ -192,47 +192,56 @@ const Home = (props) => {
               <br className="home-text12"></br>
             </h2>
           </div>
+          <div className="home-container3">
+            <iframe
+              src="https://docker-fastapi.onrender.com/main_pn"
+              scrolling="no"
+              className="home-iframe"
+            ></iframe>
+          </div>
           <form
             id="form-element"
-            action="https://fastapi-vercel-8zutk0s0r-simonefrisco.vercel.app/form"
-            method="post"
-            enctype="application/x-www-form-urlencoded"
             name="subform"
+            enctype="application/x-www-form-urlencoded"
             className="home-form"
           >
             <input
               type="text"
+              id="name"
+              name="name"
               placeholder="Name"
               autoComplete="name"
-              name="name"
-              id="name"
               className="input book-input"
             />
             <input
               type="text"
+              id="email"
+              name="email"
               placeholder="Email"
               autoComplete="email"
-              name="email"
-              id="email"
               className="input book-input"
             />
             <input
               type="text"
+              id="tel"
+              name="tel"
               placeholder="Telefono"
               autoComplete="tel"
-              name="tel"
-              id="tel"
               className="home-textinput2 input book-input"
             />
             <input
               type="text"
-              placeholder="Messaggio"
+              id="mess"
               name="mess"
               required
-              id="mess"
+              placeholder="Messaggio"
               className="input book-input"
             />
-            <button type="submit" className="home-book1 button-main button">
+            <button
+              type="button"
+              onclick="submitForm(event)"
+              className="home-book1 button-main button"
+            >
               <span>Invia</span>
             </button>
             <div className="home-inputs">
@@ -280,15 +289,19 @@ const Home = (props) => {
                 </div>
               </div>
             </div>
+            <iframe
+              src="https://www.youtube.com/embed/DeQkMK5LME4"
+              className="home-iframe1"
+            ></iframe>
           </form>
         </div>
         <div className="home-features">
-          <div className="home-container3">
-            <div className="home-container4">
+          <div className="home-container4">
+            <div className="home-container5">
               <span className="home-caption7">Dove Siamo</span>
               <span className="home-description4">Maglie, 73024 (LE)</span>
             </div>
-            <div className="home-container5">
+            <div className="home-container6">
               <div>
                 <DangerousHTML
                   html={`<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d762.5845725132749!2d18.288771534959587!3d40.13474769360892!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x13443d812353aa8d%3A0x9ecc780bc8b7aa1!2sVia%20Fratelli%20Piccinno%2C%20106%2C%2073024%20Maglie%20LE!5e0!3m2!1sen!2sit!4v1681856722553!5m2!1sen!2sit"  width="100%" height="450px" style="border:0;" allowfullscreen="True" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`}
@@ -296,6 +309,55 @@ const Home = (props) => {
               </div>
             </div>
           </div>
+        </div>
+        <div>
+          <DangerousHTML
+            html={`<script>
+function submitForm(event) {
+      event.preventDefault(); // Prevent the default form submission
+
+      // Get form values
+      var name = document.getElementById('name').value;
+      var email = document.getElementById('email').value;
+      var message = document.getElementById('message').value;
+      var tel = document.getElementById('tel').value;
+
+      // Create an object with the form data
+      var formData = {
+        name: name,
+        email: email,
+        mess: message,
+        tel: tel
+      };
+      console.log(formData);
+      // Create a new XMLHttpRequest object
+      var xhr = new XMLHttpRequest();
+      console.log(formData);
+      // Configure the request
+      xhr.open('POST', 'https://fastapi-vercel-gonw5mj4a-simonefrisco.vercel.app/form', true);
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+      // Convert the form data to JSON format
+      var jsonData = JSON.stringify(formData);
+
+      // Set up the callback function for when the request completes
+      xhr.onload = function() {
+        if (xhr.status === 200) {
+          // Request was successful
+          console.log(xhr.responseText);
+          // You can perform any additional actions here, such as showing a success message
+        } else {
+          // Request failed
+          console.error(xhr.status);
+          // You can perform any error handling here, such as showing an error message
+        }
+      };
+
+      // Send the request
+      xhr.send(jsonData);
+    }
+</script>`}
+          ></DangerousHTML>
         </div>
         <Footer></Footer>
       </div>
@@ -818,6 +880,7 @@ const Home = (props) => {
             width: 100%;
             height: 100%;
             display: flex;
+            position: relative;
             max-width: 1440px;
             align-self: center;
             align-items: stretch;
@@ -853,11 +916,22 @@ const Home = (props) => {
             font-style: normal;
             font-weight: 400;
           }
+          .home-container3 {
+            flex: 0 0 auto;
+            display: flex;
+            align-self: center;
+            align-items: flex-start;
+            flex-direction: column;
+          }
+          .home-iframe {
+            width: 424px;
+            height: 400px;
+          }
           .home-form {
             gap: var(--dl-space-space-unit);
             width: 80%;
             height: 100%;
-            display: flex;
+            display: none;
             padding: var(--dl-space-space-unit);
             align-self: center;
             align-items: center;
@@ -912,6 +986,10 @@ const Home = (props) => {
             font-style: normal;
             font-weight: 600;
           }
+          .home-iframe1 {
+            width: 320px;
+            height: 200px;
+          }
           .home-features {
             width: 100%;
             display: flex;
@@ -919,13 +997,13 @@ const Home = (props) => {
             max-width: var(--dl-size-size-maxwidth);
             flex-direction: column;
           }
-          .home-container3 {
+          .home-container4 {
             width: 100%;
             display: grid;
             grid-gap: var(--dl-space-space-twounits);
             grid-template-columns: 1fr 1fr;
           }
-          .home-container4 {
+          .home-container5 {
             flex: 0 0 auto;
             width: auto;
             display: flex;
@@ -950,7 +1028,7 @@ const Home = (props) => {
             font-family: Poppins;
             line-height: 27px;
           }
-          .home-container5 {
+          .home-container6 {
             width: auto;
             display: flex;
             align-items: center;
@@ -1155,7 +1233,7 @@ const Home = (props) => {
               text-align: center;
               line-height: 32px;
             }
-            .home-container5 {
+            .home-container6 {
               align-items: center;
               margin-right: 0px;
               margin-bottom: var(--dl-space-space-halfunit);
@@ -1222,7 +1300,7 @@ const Home = (props) => {
               padding-left: var(--dl-space-space-twounits);
               padding-right: var(--dl-space-space-twounits);
             }
-            .home-container3 {
+            .home-container4 {
               grid-template-columns: 1fr;
             }
             .home-caption7 {
@@ -1271,12 +1349,12 @@ const Home = (props) => {
               padding-right: var(--dl-space-space-unit);
               padding-bottom: var(--dl-space-space-twounits);
             }
-            .home-container4 {
+            .home-container5 {
               align-items: center;
               padding-top: var(--dl-space-space-twounits);
               padding-bottom: var(--dl-space-space-twounits);
             }
-            .home-container5 {
+            .home-container6 {
               margin-bottom: var(--dl-space-space-unit);
             }
           }
